@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# env
+.env
+.env*.local
+
+# 방 데이터 (gitkeep은 유지)
+data/*.json
+
+# test / logs
+*.log
+coverage/
