@@ -16,7 +16,11 @@
 
 ## Render
 
-1. **Web Service** 생성 → GitHub 리포지토리 연결, Runtime **Node**
+**원클릭 배포:** https://render.com/deploy?repo=https://github.com/junhybgtv3-bot/limited-rps
+(리포지토리 루트의 `render.yaml` 블루프린트를 자동으로 읽어 무료 Web Service로 생성한다.
+Render 계정으로 로그인한 뒤 GitHub 계정을 연결하면 된다.)
+
+수동 생성 시:
 2. **Build Command**: `npm install && npm run build`
 3. **Start Command**: `npm start`
 4. `PORT`는 Render가 자동 주입합니다.
