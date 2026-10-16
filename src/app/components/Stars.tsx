@@ -19,12 +19,12 @@ export default function Stars({ count, max = 6, className = '' }: Props) {
       {Array.from({ length: max }).map((_, i) => (
         <span
           key={i}
-          className={i < count ? 'text-amber-300' : 'text-slate-700'}
+          className={i < count ? 'text-[#e8c547]' : 'text-[#2c2f32]'}
         >
           ★
         </span>
       ))}
-      <span className="ml-1 text-sm font-bold text-amber-200">{count}</span>
+      <span className="ml-1 text-sm font-bold text-[#e8c547]">{count}</span>
     </span>
   );
 }

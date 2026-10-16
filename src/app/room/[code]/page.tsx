@@ -23,6 +23,7 @@ import {
   type SubmitAck,
 } from '@/app/lib/socket';
 import { toast } from '@/app/components/Toaster';
+import { ZawaBackground } from '@/app/components/Kaiji';
 import { LanguageSwitcher, useLanguage } from '@/app/i18n/LanguageContext';
 import Stars from '@/app/components/Stars';
 import CardButton from '@/app/components/CardButton';
@@ -363,27 +364,28 @@ export default function RoomPage() {
   };
 
   const pageClass =
-    'relative min-h-screen bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#020617] px-4 py-6 text-slate-100';
+    'kaiji-bg relative min-h-screen overflow-hidden px-4 py-6 text-[#ece7d8]';
 
   // ============ 연결 중 ============
   if (phase === 'connecting') {
     return (
       <main className={`${pageClass} flex items-center justify-center`}>
-        <div className="absolute right-4 top-4">
+        <ZawaBackground />
+        <div className="absolute right-4 top-4 z-10">
           <LanguageSwitcher />
         </div>
-        <div className="flex flex-col items-center gap-4">
-          <div className="text-5xl" aria-hidden="true">
-            ⏳
+        <div className="relative z-10 flex flex-col items-center gap-4">
+          <div className="font-serif-jp text-5xl font-black text-[#c1121f]" aria-hidden="true">
+            ざわ‥
           </div>
-          <p className="text-lg font-bold text-slate-200">
+          <p className="text-lg font-bold text-[#ece7d8]">
             {connFailed ? t.common.serverUnreachable : t.room.connecting}
           </p>
           {connFailed && (
             <button
               type="button"
               onClick={() => void doReconnectRef.current()}
-              className="rounded-xl bg-amber-400 px-6 py-3 font-bold text-slate-900 transition active:scale-95"
+              className="kaiji-btn kaiji-btn-blood px-6 py-3 font-bold"
             >
               {t.room.retry}
             </button>
@@ -391,7 +393,7 @@ export default function RoomPage() {
           <button
             type="button"
             onClick={() => router.push('/')}
-            className="text-sm text-slate-400 underline"
+            className="text-sm text-[#9a9587] underline"
           >
             {t.common.backToMain}
           </button>
@@ -404,20 +406,21 @@ export default function RoomPage() {
   if (phase === 'join') {
     return (
       <main className={`${pageClass} flex items-center justify-center`}>
-        <div className="absolute right-4 top-4">
+        <ZawaBackground />
+        <div className="absolute right-4 top-4 z-10">
           <LanguageSwitcher />
         </div>
         <form
           onSubmit={handleJoin}
-          className="w-full max-w-sm rounded-2xl border border-slate-700 bg-slate-900/80 p-6"
+          className="relative z-10 w-full max-w-sm border-2 border-[#2c2f32] bg-[#141416]/95 p-6"
         >
-          <p className="mb-1 text-center text-sm text-slate-400">
+          <p className="mb-1 text-center text-sm text-[#9a9587]">
             {t.common.roomCode}
           </p>
-          <p className="mb-5 text-center text-3xl font-black tracking-[0.3em] text-amber-300">
+          <p className="font-display mb-5 text-center text-3xl tracking-[0.3em] text-[#ece7d8]">
             {code}
           </p>
-          <label className="mb-1 block text-sm font-semibold text-slate-300">
+          <label className="mb-1 block text-sm font-semibold text-[#9a9587]">
             {t.common.nickname}
           </label>
           <input
@@ -425,24 +428,24 @@ export default function RoomPage() {
             onChange={(e) => setJoinName(e.target.value)}
             maxLength={12}
             placeholder={t.common.nicknamePlaceholder}
-            className="w-full rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-3 text-lg text-slate-100 placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
+            className="w-full border-2 border-[#2c2f32] bg-[#0b0c0d] px-4 py-3 text-lg text-[#ece7d8] placeholder:text-[#57534a] focus:border-[#b3122e] focus:outline-none"
           />
           {joinErr && (
-            <p className="mt-3 text-center text-sm font-medium text-red-400">
+            <p className="mt-3 text-center text-sm font-medium text-[#ff6b6b]">
               {joinErr}
             </p>
           )}
           <button
             type="submit"
             disabled={joinBusy}
-            className="mt-4 w-full rounded-xl bg-amber-400 px-6 py-3 text-base font-bold text-slate-900 transition active:scale-95 disabled:opacity-50"
+            className="kaiji-btn kaiji-btn-blood mt-4 w-full px-6 py-3 text-base font-bold disabled:opacity-50"
           >
             {joinBusy ? t.home.joining : t.home.joinRoom}
           </button>
           <button
             type="button"
             onClick={() => router.push('/')}
-            className="mt-3 w-full text-center text-sm text-slate-400 underline"
+            className="mt-3 w-full text-center text-sm text-[#9a9587] underline"
           >
             {t.common.backToMain}
           </button>
@@ -462,27 +465,28 @@ export default function RoomPage() {
 
     return (
       <main className={pageClass}>
-        <div className="mx-auto flex w-full max-w-md flex-col gap-4">
+        <ZawaBackground />
+        <div className="relative z-10 mx-auto flex w-full max-w-md flex-col gap-4">
           <div className="flex justify-end">
             <LanguageSwitcher />
           </div>
           <div className="text-center">
-            <p className="text-sm text-slate-400">{t.common.roomCode}</p>
-            <p className="text-5xl font-black tracking-[0.2em] text-amber-300">
+            <p className="text-sm text-[#9a9587]">{t.common.roomCode}</p>
+            <p className="font-display text-5xl tracking-[0.2em] text-[#ece7d8]">
               {code}
             </p>
             <div className="mt-3 flex justify-center gap-2">
               <button
                 type="button"
                 onClick={() => void copyText(code, 'code')}
-                className="rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-2 text-sm font-bold text-slate-200 transition active:scale-95"
+                className="kaiji-btn kaiji-btn-ghost px-4 py-2 text-sm font-bold"
               >
                 {t.room.lobby.copyCode}
               </button>
               <button
                 type="button"
                 onClick={() => void copyText(inviteUrl, 'invite')}
-                className="rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-2 text-sm font-bold text-slate-200 transition active:scale-95"
+                className="kaiji-btn kaiji-btn-ghost px-4 py-2 text-sm font-bold"
               >
                 {t.room.lobby.copyInvite}
               </button>
@@ -496,30 +500,30 @@ export default function RoomPage() {
               return (
                 <div
                   key={slot}
-                  className={`rounded-2xl border p-4 ${
+                  className={`border-2 p-4 ${
                     isMe
-                      ? 'border-amber-400/50 bg-amber-400/5'
-                      : 'border-slate-700 bg-slate-900/60'
+                      ? 'border-[#b3122e] bg-[rgba(179,18,46,0.08)]'
+                      : 'border-[#2c2f32] bg-[#141416]'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-[#9a9587]">
                         {t.room.lobby.player(i)}
                         {isMe && (
-                          <span className="ml-1 font-bold text-amber-300">
+                          <span className="ml-1 font-bold text-[#d41f2f]">
                             {t.room.lobby.youSuffix}
                           </span>
                         )}
                       </p>
-                      <p className="text-lg font-bold text-slate-100">
+                      <p className="text-lg font-bold text-[#ece7d8]">
                         {p ? p.nickname : t.room.lobby.waiting}
                       </p>
                     </div>
                     {p && (
                       <div className="flex flex-col items-end gap-1">
                         <span
-                          className={`text-sm font-bold ${p.connected ? 'text-emerald-400' : 'text-slate-500'}`}
+                          className={`text-sm font-bold ${p.connected ? 'text-emerald-400' : 'text-[#57534a]'}`}
                         >
                           {p.connected ? '●' : '○'}{' '}
                           {p.connected
@@ -527,10 +531,10 @@ export default function RoomPage() {
                             : t.room.lobby.disconnected}
                         </span>
                         <span
-                          className={`rounded-full px-3 py-1 text-xs font-bold ${
+                          className={`px-3 py-1 text-xs font-bold ${
                             p.ready
                               ? 'bg-emerald-500/20 text-emerald-300'
-                              : 'bg-slate-700/60 text-slate-300'
+                              : 'bg-[#2c2f32] text-[#9a9587]'
                           }`}
                         >
                           {p.ready
@@ -546,7 +550,7 @@ export default function RoomPage() {
           </div>
 
           {!lobby && (
-            <p className="text-center text-sm text-slate-400">
+            <p className="text-center text-sm text-[#9a9587]">
               {t.room.lobby.loading}
             </p>
           )}
@@ -555,24 +559,22 @@ export default function RoomPage() {
             type="button"
             onClick={toggleReady}
             disabled={!me}
-            className={`w-full rounded-2xl px-6 py-4 text-lg font-bold transition active:scale-95 disabled:opacity-50 ${
-              me?.ready
-                ? 'border-2 border-slate-600 bg-slate-800 text-slate-200'
-                : 'bg-amber-400 text-slate-900 shadow-[0_0_24px_rgba(245,197,24,0.25)]'
+            className={`kaiji-btn w-full px-6 py-4 text-lg font-bold disabled:opacity-50 ${
+              me?.ready ? 'kaiji-btn-dark' : 'kaiji-btn-blood'
             }`}
           >
             {me?.ready
               ? t.room.lobby.unreadyButton
               : t.room.lobby.readyButton}
           </button>
-          <p className="text-center text-xs text-slate-500">
+          <p className="text-center text-xs text-[#9a9587]">
             {t.room.lobby.readyHint}
           </p>
 
           <button
             type="button"
             onClick={leaveRoom}
-            className="w-full rounded-2xl border border-slate-700 bg-slate-800/40 px-6 py-3 text-base font-bold text-slate-300 transition active:scale-95"
+            className="kaiji-btn kaiji-btn-dark w-full px-6 py-3 text-base font-bold"
           >
             {t.room.lobby.leaveRoom}
           </button>
@@ -594,10 +596,10 @@ export default function RoomPage() {
         ? t.room.finished.winTitle
         : t.room.finished.loseTitle;
     const titleColor = isDraw
-      ? 'text-slate-200'
+      ? 'text-[#ece7d8]'
       : isWin
         ? 'text-emerald-300'
-        : 'text-red-400';
+        : 'text-[#ff6b6b]';
 
     let desc = t.room.finished.defaultDesc;
     if (final.finishReason === 'stars_zero') {
@@ -620,24 +622,25 @@ export default function RoomPage() {
 
     return (
       <main className={`${pageClass} flex items-center justify-center`}>
-        <div className="absolute right-4 top-4">
+        <ZawaBackground />
+        <div className="absolute right-4 top-4 z-10">
           <LanguageSwitcher />
         </div>
-        <div className="animate-rps-pop flex w-full max-w-sm flex-col items-center rounded-2xl border border-slate-700 bg-slate-900/80 p-8">
+        <div className="animate-rps-pop relative z-10 flex w-full max-w-sm flex-col items-center border-2 border-[#2c2f32] bg-[#141416] p-8 shadow-[8px_8px_0_#000]">
           <div className="mb-2 text-6xl" aria-hidden="true">
             {isDraw ? '🤝' : isWin ? '🏆' : '😞'}
           </div>
-          <h1 className={`text-4xl font-black ${titleColor}`}>{title}</h1>
-          <p className="mt-3 text-center text-sm leading-relaxed text-slate-300">
+          <h1 className={`font-display text-4xl tracking-wide ${titleColor}`}>{title}</h1>
+          <p className="mt-3 text-center text-sm leading-relaxed text-[#9a9587]">
             {desc}
           </p>
-          <div className="mt-6 flex w-full items-center justify-between rounded-xl bg-slate-800/60 px-5 py-4">
+          <div className="mt-6 flex w-full items-center justify-between border border-[#2c2f32] bg-[#1c1e20] px-5 py-4">
             <div className="text-center">
-              <p className="text-xs text-slate-400">{t.common.you}</p>
+              <p className="text-xs text-[#9a9587]">{t.common.you}</p>
               <Stars count={fview.me.stars} />
             </div>
             <div className="text-center">
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[#9a9587]">
                 {fview.opponent.nickname || t.common.opponentFallback}
               </p>
               <Stars count={fview.opponent.stars} />
@@ -646,7 +649,7 @@ export default function RoomPage() {
           <button
             type="button"
             onClick={() => router.push('/')}
-            className="mt-6 w-full rounded-2xl bg-amber-400 px-6 py-4 text-lg font-bold text-slate-900 transition active:scale-95"
+            className="kaiji-btn kaiji-btn-blood mt-6 w-full px-6 py-4 text-lg font-bold"
           >
             {t.common.backToMain}
           </button>
@@ -670,56 +673,57 @@ export default function RoomPage() {
 
     return (
       <main className={pageClass}>
-        <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-md flex-col gap-4">
+        <ZawaBackground />
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-md flex-col gap-4">
           <div className="flex justify-end">
             <LanguageSwitcher />
           </div>
           {/* 상단 바 */}
-          <header className="flex items-center justify-between rounded-2xl border border-slate-700/60 bg-slate-900/60 px-4 py-3">
-            <div className="text-sm font-bold text-slate-300">
+          <header className="flex items-center justify-between border-2 border-[#2c2f32] bg-[#141416] px-4 py-3">
+            <div className="text-sm font-bold text-[#9a9587]">
               {t.room.game.roomLabel}{' '}
-              <span className="text-amber-300">{code}</span>
+              <span className="font-display tracking-widest text-[#d41f2f]">{code}</span>
             </div>
-            <div className="text-sm font-bold text-slate-200">
+            <div className="text-sm font-bold text-[#ece7d8]">
               ⏱ {formatRemaining(remaining)}
             </div>
-            <div className="text-sm font-bold text-slate-200">
+            <div className="font-display text-sm tracking-widest text-[#ece7d8]">
               {view.roundNumber} / {TOTAL_ROUNDS}R
             </div>
             <div
-              className={`text-sm font-bold ${connected ? 'text-emerald-400' : 'text-red-400'}`}
+              className={`text-sm font-bold ${connected ? 'text-emerald-400' : 'text-[#c1121f]'}`}
             >
               {connected ? '●' : '○'}
             </div>
           </header>
 
           {/* 상대 패널 */}
-          <section className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4">
+          <section className="border-2 border-[#2c2f32] bg-[#141416] p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-slate-400">{t.common.opponent}</p>
-                <p className="text-lg font-bold text-slate-100">
+                <p className="text-xs text-[#9a9587]">{t.common.opponent}</p>
+                <p className="text-lg font-bold text-[#ece7d8]">
                   {view.opponent.nickname || t.common.opponentFallback}
                 </p>
               </div>
               {!view.opponent.connected && (
-                <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-bold text-red-300">
+                <span className="bg-[#c1121f]/20 px-3 py-1 text-xs font-bold text-[#ff6b6b]">
                   {t.room.game.oppDisconnected}
                 </span>
               )}
             </div>
             <div className="mt-2 flex items-center justify-between">
               <Stars count={view.opponent.stars} />
-              <span className="text-sm text-slate-300">
+              <span className="text-sm text-[#9a9587]">
                 <strong>{t.room.game.cardsLeft(view.opponent.totalCards)}</strong>
               </span>
             </div>
             <div className="mt-2">
               <span
-                className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${
+                className={`inline-block px-3 py-1 text-xs font-bold ${
                   view.opponent.submitted
                     ? 'bg-emerald-500/20 text-emerald-300'
-                    : 'bg-slate-700/60 text-slate-300'
+                    : 'bg-[#2c2f32] text-[#9a9587]'
                 }`}
               >
                 {view.opponent.submitted
@@ -730,18 +734,18 @@ export default function RoomPage() {
           </section>
 
           {/* 내 패널 */}
-          <section className="rounded-2xl border border-amber-400/30 bg-slate-900/60 p-4">
+          <section className="border-2 border-[#b3122e] bg-[#141416] p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-slate-400">{t.common.you}</p>
-                <p className="text-lg font-bold text-slate-100">
+                <p className="text-xs text-[#9a9587]">{t.common.you}</p>
+                <p className="text-lg font-bold text-[#ece7d8]">
                   {view.me.nickname}
                 </p>
               </div>
             </div>
             <div className="mt-2 flex items-center justify-between">
               <Stars count={view.me.stars} />
-              <span className="text-sm text-slate-300">
+              <span className="text-sm text-[#9a9587]">
                 <strong>
                   {t.room.game.cardsLeft(
                     view.me.hand.rock +
@@ -755,7 +759,7 @@ export default function RoomPage() {
               {CARDS.map((c) => (
                 <span
                   key={c}
-                  className="flex-1 rounded-lg bg-slate-800/70 px-2 py-1 text-center font-bold text-slate-200"
+                  className="flex-1 border border-[#2c2f32] bg-[#1c1e20] px-2 py-1 text-center font-bold text-[#ece7d8]"
                 >
                   {CARD_EMOJI[c]} {t.cardName[c]} ×{view.me.hand[c]}
                 </span>
@@ -784,19 +788,19 @@ export default function RoomPage() {
                 type="button"
                 onClick={() => void submitCard()}
                 disabled={!selected || submitting}
-                className="w-full rounded-2xl bg-amber-400 px-6 py-4 text-xl font-black text-slate-900 shadow-[0_0_24px_rgba(245,197,24,0.25)] transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
+                className="kaiji-btn kaiji-btn-blood font-display w-full px-6 py-4 text-xl tracking-[0.2em] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {submitting ? t.room.game.submitting : t.room.game.set}
               </button>
             </>
           ) : (
-            <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-6 text-center">
-              <p className="text-lg font-bold text-slate-200">
+            <div className="border-2 border-[#2c2f32] bg-[#141416] p-6 text-center">
+              <p className="text-lg font-bold text-[#ece7d8]">
                 {view.opponent.submitted
                   ? t.room.game.revealing
                   : t.room.game.waitingOpponent}
               </p>
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="mt-1 text-sm text-[#9a9587]">
                 {t.room.game.submittedCard(
                   selected
                     ? `${CARD_EMOJI[selected]} ${t.cardName[selected]}`
@@ -811,38 +815,38 @@ export default function RoomPage() {
 
         {/* 결과 오버레이 */}
         {reveal && revealMyCard && revealOppCard && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-            <div className="animate-rps-pop w-full max-w-sm rounded-2xl border border-amber-400/40 bg-slate-900 p-6 text-center">
-              <p className="text-sm font-bold text-slate-400">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
+            <div className="animate-rps-pop w-full max-w-sm border-2 border-[#b3122e]/60 bg-[#141416] p-6 text-center shadow-[8px_8px_0_#000]">
+              <p className="text-sm font-bold text-[#9a9587]">
                 {t.room.game.roundResult(reveal.roundNumber)}
               </p>
               <div className="mt-4 flex items-center justify-around">
                 <div>
-                  <p className="mb-1 text-xs text-slate-400">{t.common.you}</p>
+                  <p className="mb-1 text-xs text-[#9a9587]">{t.common.you}</p>
                   <p className="text-6xl">{CARD_EMOJI[revealMyCard]}</p>
-                  <p className="mt-1 text-sm font-bold text-slate-200">
+                  <p className="mt-1 text-sm font-bold text-[#ece7d8]">
                     {t.cardName[revealMyCard]}
                   </p>
                   {revealDelta && (
                     <p
-                      className={`mt-1 text-sm font-bold ${revealDelta.me >= 0 ? 'text-emerald-300' : 'text-red-300'}`}
+                      className={`mt-1 text-sm font-bold ${revealDelta.me >= 0 ? 'text-emerald-300' : 'text-[#ff6b6b]'}`}
                     >
                       ⭐ {deltaText(revealDelta.me)}
                     </p>
                   )}
                 </div>
-                <p className="text-3xl font-black text-slate-500">VS</p>
+                <p className="font-display text-3xl text-[#57534a]">VS</p>
                 <div>
-                  <p className="mb-1 text-xs text-slate-400">
+                  <p className="mb-1 text-xs text-[#9a9587]">
                     {t.common.opponent}
                   </p>
                   <p className="text-6xl">{CARD_EMOJI[revealOppCard]}</p>
-                  <p className="mt-1 text-sm font-bold text-slate-200">
+                  <p className="mt-1 text-sm font-bold text-[#ece7d8]">
                     {t.cardName[revealOppCard]}
                   </p>
                   {revealDelta && (
                     <p
-                      className={`mt-1 text-sm font-bold ${revealDelta.opp >= 0 ? 'text-emerald-300' : 'text-red-300'}`}
+                      className={`mt-1 text-sm font-bold ${revealDelta.opp >= 0 ? 'text-emerald-300' : 'text-[#ff6b6b]'}`}
                     >
                       ⭐ {deltaText(revealDelta.opp)}
                     </p>
@@ -850,12 +854,12 @@ export default function RoomPage() {
                 </div>
               </div>
               <p
-                className={`mt-5 text-3xl font-black ${
+                className={`font-display mt-5 text-3xl tracking-wide ${
                   revealDraw
-                    ? 'text-slate-200'
+                    ? 'text-[#ece7d8]'
                     : revealWon
                       ? 'text-emerald-300'
-                      : 'text-red-400'
+                      : 'text-[#ff6b6b]'
                 }`}
               >
                 {revealDraw
@@ -874,10 +878,11 @@ export default function RoomPage() {
   // 폴백 (상태 전이 중)
   return (
     <main className={`${pageClass} flex items-center justify-center`}>
-      <div className="absolute right-4 top-4">
+      <ZawaBackground />
+      <div className="absolute right-4 top-4 z-10">
         <LanguageSwitcher />
       </div>
-      <p className="text-slate-400">{t.common.loading}</p>
+      <p className="relative z-10 text-[#9a9587]">{t.common.loading}</p>
     </main>
   );
 }

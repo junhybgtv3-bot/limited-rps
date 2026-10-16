@@ -19,9 +19,9 @@ export function toast(message: string, kind: ToastKind = 'info'): void {
 }
 
 const COLORS: Record<ToastKind, string> = {
-  error: 'border-red-500/50 bg-red-950/95 text-red-100',
-  success: 'border-emerald-500/50 bg-emerald-950/95 text-emerald-100',
-  info: 'border-slate-500/50 bg-slate-900/95 text-slate-100',
+  error: 'border-[#c1121f] bg-[#1c0a0c] text-[#ffb3b3]',
+  success: 'border-[#3d7a44] bg-[#0c1510] text-[#bfe8c4]',
+  info: 'border-[#57534a] bg-[#1c1e20] text-[#ece7d8]',
 };
 
 export default function Toaster() {
@@ -45,7 +45,7 @@ export default function Toaster() {
       {items.map((t) => (
         <div
           key={t.id}
-          className={`w-full rounded-xl border px-4 py-3 text-center text-sm font-medium shadow-xl ${COLORS[t.kind]}`}
+          className={`w-full border-2 px-4 py-3 text-center text-sm font-medium shadow-[4px_4px_0_#000] ${COLORS[t.kind]}`}
         >
           {t.message}
         </div>

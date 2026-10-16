@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ZawaBackground } from '../components/Kaiji';
 import { LanguageSwitcher, useLanguage } from '../i18n/LanguageContext';
 
 function Section({
@@ -11,9 +12,12 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-5">
-      <h2 className="mb-3 text-lg font-bold text-amber-300">{title}</h2>
-      <div className="space-y-2 text-sm leading-relaxed text-slate-300">
+    <section className="border-2 border-[#2c2f32] bg-[#141416] p-5">
+      <h2 className="font-display mb-3 text-lg tracking-wide text-[#ece7d8]">
+        <span className="mr-2 inline-block h-4 w-1.5 bg-[#c1121f]" aria-hidden="true" />
+        {title}
+      </h2>
+      <div className="space-y-2 text-sm leading-relaxed text-[#9a9587]">
         {children}
       </div>
     </section>
@@ -31,7 +35,7 @@ export default function HowToPlayPage() {
       desc: (
         <>
           {h.stepSetA}
-          <strong className="text-amber-200">{h.stepSetStrong}</strong>
+          <strong className="text-[#e8c547]">{h.stepSetStrong}</strong>
           {h.stepSetB}
         </>
       ),
@@ -42,16 +46,17 @@ export default function HowToPlayPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#020617] px-4 py-8 text-slate-100">
-      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
+    <main className="kaiji-bg relative min-h-screen overflow-hidden px-4 py-8 text-[#ece7d8]">
+      <ZawaBackground />
+      <div className="relative z-10 mx-auto flex w-full max-w-xl flex-col gap-4">
         <div className="flex items-center gap-3">
           <Link
             href="/"
-            className="rounded-xl border border-slate-700 bg-slate-800/60 px-3 py-2 text-sm font-bold text-slate-200 transition active:scale-95"
+            className="kaiji-btn kaiji-btn-ghost px-3 py-2 text-sm font-bold"
           >
             {h.back}
           </Link>
-          <h1 className="text-2xl font-black text-amber-300">{h.title}</h1>
+          <h1 className="font-display text-2xl tracking-wide text-[#ece7d8]">{h.title}</h1>
           <div className="ml-auto">
             <LanguageSwitcher />
           </div>
@@ -60,7 +65,7 @@ export default function HowToPlayPage() {
         <Section title={h.goalTitle}>
           <p>
             {h.goalA}
-            <strong className="text-amber-200">{h.goalStrong}</strong>
+            <strong className="text-[#e8c547]">{h.goalStrong}</strong>
             {h.goalB}
           </p>
         </Section>
@@ -69,12 +74,12 @@ export default function HowToPlayPage() {
           <ul className="list-disc space-y-1 pl-5">
             <li>
               {h.deal1a}
-              <strong>{h.deal1b}</strong>
+              <strong className="text-[#ece7d8]">{h.deal1b}</strong>
               {h.deal1c}
             </li>
             <li>
               {h.deal2a}
-              <strong>{h.deal2b}</strong>
+              <strong className="text-[#ece7d8]">{h.deal2b}</strong>
               {h.deal2c}
             </li>
           </ul>
@@ -84,11 +89,11 @@ export default function HowToPlayPage() {
           <ol className="list-decimal space-y-1 pl-5">
             {roundSteps.map((s) => (
               <li key={s.name}>
-                <strong className="text-slate-100">{s.name}</strong> — {s.desc}
+                <strong className="text-[#ece7d8]">{s.name}</strong> — {s.desc}
               </li>
             ))}
           </ol>
-          <p className="text-slate-400">{h.roundsNote}</p>
+          <p className="text-[#57534a]">{h.roundsNote}</p>
         </Section>
 
         <Section title={h.starsTitle}>
@@ -97,7 +102,7 @@ export default function HowToPlayPage() {
               {h.star1a}
               <strong className="text-emerald-300">{h.star1b}</strong>
               {h.star1c}
-              <strong className="text-red-300">{h.star1d}</strong>
+              <strong className="text-[#ff6b6b]">{h.star1d}</strong>
               {h.star1e}
             </li>
             <li>{h.star2}</li>
@@ -108,17 +113,17 @@ export default function HowToPlayPage() {
           <ol className="list-decimal space-y-1 pl-5">
             <li>
               {h.win1a}
-              <strong className="text-amber-200">{h.win1b}</strong>
+              <strong className="text-[#e8c547]">{h.win1b}</strong>
               {h.win1c}
             </li>
             <li>
               {h.win2a}
-              <strong className="text-amber-200">{h.win2b}</strong>
+              <strong className="text-[#e8c547]">{h.win2b}</strong>
               {h.win2c}
             </li>
             <li>
               {h.win3a}
-              <strong className="text-amber-200">{h.win3b}</strong>
+              <strong className="text-[#e8c547]">{h.win3b}</strong>
               {h.win3c}
             </li>
           </ol>
@@ -135,14 +140,14 @@ export default function HowToPlayPage() {
         <Section title={h.dcTitle}>
           <p>
             {h.dcA}
-            <strong className="text-amber-200">{h.dcStrong}</strong>
+            <strong className="text-[#e8c547]">{h.dcStrong}</strong>
             {h.dcB}
           </p>
         </Section>
 
         <Link
           href="/"
-          className="mt-2 w-full rounded-2xl bg-amber-400 px-6 py-4 text-center text-lg font-bold text-slate-900 transition active:scale-95"
+          className="kaiji-btn kaiji-btn-blood mt-2 block w-full px-6 py-4 text-center text-lg font-bold"
         >
           {h.backToMain}
         </Link>

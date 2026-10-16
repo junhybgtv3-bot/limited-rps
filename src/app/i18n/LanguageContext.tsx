@@ -81,14 +81,14 @@ export function useLanguage(): LanguageContextValue {
 export function LanguageSwitcher() {
   const { lang, setLang } = useLanguage();
   const btn = (active: boolean) =>
-    `rounded-full px-3 py-1.5 text-xs font-bold transition ${
+    `px-3 py-1.5 text-xs font-bold transition ${
       active
-        ? 'bg-amber-400 text-slate-900 shadow'
-        : 'text-slate-300 hover:text-white'
+        ? 'bg-[#b3122e] text-white'
+        : 'text-[#9a9587] hover:text-[#ece7d8]'
     }`;
   return (
     <div
-      className="inline-flex items-center gap-0.5 rounded-full border border-slate-700 bg-slate-800/70 p-1"
+      className="inline-flex items-center gap-0.5 border-2 border-[#2c2f32] bg-[#141416]/90 p-1"
       role="group"
       aria-label="Language / 언어 / 言語"
     >
