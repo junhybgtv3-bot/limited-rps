@@ -219,6 +219,12 @@ export default function HomePage() {
           <p className="text-sm font-semibold tracking-wide text-[#ece7d8]">
             EMU Japanese Student Association
           </p>
+          <Link
+            href="/privacy"
+            className="mt-1 text-[11px] tracking-wide text-[#6b675c] underline underline-offset-2 hover:text-[#9a9587]"
+          >
+            {t.privacy.title}
+          </Link>
         </footer>
       </div>
 

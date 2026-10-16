@@ -176,6 +176,31 @@ export const ko = {
     dcB: ' 안에 다시 접속하면 게임을 이어서 할 수 있습니다. 60초가 지나면 몰수패 처리됩니다.',
     backToMain: '메인으로 돌아가기',
   },
+  privacy: {
+    back: '← 뒤로',
+    title: '개인정보 처리방침',
+    updated: '최종 업데이트: 2026년 10월 16일',
+    intro:
+      '한정 가위바위보는 실시간 1대1 카드 게임입니다. 플레이에 계정 가입이 필요하지 않습니다.',
+    collectTitle: '수집하는 정보',
+    collectBody: [
+      '게임을 진행하기 위해 앱은 다음 정보를 게임 서버(https://limited-rps-jj0r.onrender.com)로 전송합니다: 입력한 닉네임, 방 코드, 매 라운드에 낸 카드. 두 플레이어가 서로를 찾아 실시간으로 대전하는 데 필요한 최소한의 정보입니다.',
+      '실명, 이메일 주소, 전화번호, 위치, 연락처, 사진, 기기 식별자는 요청하지도 수집하지도 않습니다.',
+    ],
+    notCollectTitle: '하지 않는 것',
+    notCollectBody: [
+      '분석·추적 SDK를 사용하지 않습니다. 광고도 없습니다. 정보를 제3자에게 판매·대여·공유하지 않습니다.',
+    ],
+    retentionTitle: '보유 기간',
+    retentionBody: [
+      '방 데이터(닉네임, 낸 카드, 게임 상태)는 방이 활성화된 동안만 보관되며, 방이 만료되면 삭제됩니다. 늦어도 게임 시작 후 4시간 이내, 게임 종료 후에는 즉시 삭제됩니다.',
+    ],
+    contactTitle: '문의',
+    contactBody: [
+      '이 방침에 대한 문의는 앱 웹사이트의 지원 링크를 이용해 주세요: https://limited-rps-jj0r.onrender.com',
+    ],
+    backToMain: '메인으로 돌아가기',
+  },
 };
 
 export type Dict = typeof ko;

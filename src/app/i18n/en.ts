@@ -175,4 +175,29 @@ export const en: Dict = {
     dcB: ' and continue the game. After 60 seconds, it counts as a forfeit loss.',
     backToMain: 'Back to main',
   },
+  privacy: {
+    back: '← Back',
+    title: 'Privacy Policy',
+    updated: 'Last updated: October 16, 2026',
+    intro:
+      'Limited RPS is a real-time 1v1 card game. No account or sign-up is required to play.',
+    collectTitle: 'Information we collect',
+    collectBody: [
+      'To run a match, the app sends the following to our game server (https://limited-rps-jj0r.onrender.com): the nickname you enter, the room code, and the cards you play each round. This is the minimum needed for two players to find each other and play in real time.',
+      'We do not ask for or collect your real name, email address, phone number, location, contacts, photos, or device identifiers.',
+    ],
+    notCollectTitle: "What we don't do",
+    notCollectBody: [
+      'No analytics or tracking SDKs. No advertisements. We do not sell, rent, or share your information with third parties.',
+    ],
+    retentionTitle: 'Data retention',
+    retentionBody: [
+      'Room data (nicknames, cards played, game state) is kept only while the room is active and is deleted when the room expires — at most 4 hours after the game starts, or shortly after the game ends.',
+    ],
+    contactTitle: 'Contact',
+    contactBody: [
+      "If you have questions about this policy, contact us via the support link on the app's website: https://limited-rps-jj0r.onrender.com",
+    ],
+    backToMain: 'Back to main',
+  },
 };
