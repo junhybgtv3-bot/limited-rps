@@ -4,8 +4,8 @@ import Toaster from './components/Toaster';
 import { LanguageProvider } from './i18n/LanguageContext';
 
 export const metadata: Metadata = {
-  title: '한정 가위바위보',
-  description: '1대1 실시간 한정 가위바위보 웹게임',
+  title: 'Limited Rock Paper Scissors',
+  description: 'Real-time 1v1 limited rock-paper-scissors web game',
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <body>
         <LanguageProvider>
           {children}

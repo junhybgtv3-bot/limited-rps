@@ -18,7 +18,7 @@ const LANG_KEY = 'lrps:lang';
 const dicts: Record<Lang, Dict> = { ko, en, ja };
 
 // 훅을 쓸 수 없는 모듈(socket.ts 타임아웃 메시지 등)에서 현재 언어를 읽기 위한 게터
-let currentLang: Lang = 'ko';
+let currentLang: Lang = 'en';
 export function getLang(): Lang {
   return currentLang;
 }
@@ -36,12 +36,12 @@ const LanguageContext = createContext<LanguageContextValue>({
 });
 
 function readStoredLang(): Lang {
-  if (typeof window === 'undefined') return 'ko';
+  if (typeof window === 'undefined') return 'en';
   try {
     const v = window.localStorage.getItem(LANG_KEY);
-    return v === 'en' || v === 'ja' ? v : 'ko';
+    return v === 'ko' || v === 'ja' ? v : 'en';
   } catch {
-    return 'ko';
+    return 'en';
   }
 }
 
