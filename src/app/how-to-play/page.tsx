@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { LanguageSwitcher, useLanguage } from '../i18n/LanguageContext';
 
 function Section({
   title,
@@ -18,6 +21,26 @@ function Section({
 }
 
 export default function HowToPlayPage() {
+  const { t } = useLanguage();
+  const h = t.howto;
+
+  const roundSteps = [
+    { name: h.stepCheck, desc: h.stepCheckDesc },
+    {
+      name: h.stepSet,
+      desc: (
+        <>
+          {h.stepSetA}
+          <strong className="text-amber-200">{h.stepSetStrong}</strong>
+          {h.stepSetB}
+        </>
+      ),
+    },
+    { name: h.stepOpen, desc: h.stepOpenDesc },
+    { name: h.stepResult, desc: h.stepResultDesc },
+    { name: h.stepUpdate, desc: h.stepUpdateDesc },
+  ];
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#020617] px-4 py-8 text-slate-100">
       <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
@@ -26,99 +49,94 @@ export default function HowToPlayPage() {
             href="/"
             className="rounded-xl border border-slate-700 bg-slate-800/60 px-3 py-2 text-sm font-bold text-slate-200 transition active:scale-95"
           >
-            ← 뒤로
+            {h.back}
           </Link>
-          <h1 className="text-2xl font-black text-amber-300">게임 방법</h1>
+          <h1 className="text-2xl font-black text-amber-300">{h.title}</h1>
+          <div className="ml-auto">
+            <LanguageSwitcher />
+          </div>
         </div>
 
-        <Section title="🎯 게임 목표">
+        <Section title={h.goalTitle}>
           <p>
-            상대방의 별을 <strong className="text-amber-200">0개</strong>로
-            만들거나, 12라운드가 끝났을 때 별을 더 많이 보유하면 승리합니다.
+            {h.goalA}
+            <strong className="text-amber-200">{h.goalStrong}</strong>
+            {h.goalB}
           </p>
         </Section>
 
-        <Section title="🃏 초기 지급">
+        <Section title={h.dealTitle}>
           <ul className="list-disc space-y-1 pl-5">
             <li>
-              바위 ✊ / 가위 ✌️ / 보 ✋ 카드를 <strong>각 4장씩</strong> (총 12장)
-              받습니다.
+              {h.deal1a}
+              <strong>{h.deal1b}</strong>
+              {h.deal1c}
             </li>
             <li>
-              별 ⭐을 <strong>3개씩</strong> 받습니다. (양쪽 합계 6개 유지)
+              {h.deal2a}
+              <strong>{h.deal2b}</strong>
+              {h.deal2c}
             </li>
           </ul>
         </Section>
 
-        <Section title="🔄 라운드 진행">
+        <Section title={h.roundsTitle}>
           <ol className="list-decimal space-y-1 pl-5">
-            <li>
-              <strong className="text-slate-100">Check</strong> — 남은 카드를
-              확인합니다.
-            </li>
-            <li>
-              <strong className="text-slate-100">Set</strong> — 낼 카드를 고르고{' '}
-              <strong className="text-amber-200">SET</strong> 버튼을 눌러
-              제출합니다.
-            </li>
-            <li>
-              <strong className="text-slate-100">Open</strong> — 양쪽이 모두
-              제출하면 카드가 동시에 공개됩니다.
-            </li>
-            <li>
-              <strong className="text-slate-100">Result</strong> — 승패를
-              판정합니다.
-            </li>
-            <li>
-              <strong className="text-slate-100">Update</strong> — 별이 이동하고
-              다음 라운드로 넘어갑니다.
-            </li>
+            {roundSteps.map((s) => (
+              <li key={s.name}>
+                <strong className="text-slate-100">{s.name}</strong> — {s.desc}
+              </li>
+            ))}
           </ol>
-          <p className="text-slate-400">
-            상대가 무엇을 냈는지는 공개 전까지 절대 알 수 없습니다.
-          </p>
+          <p className="text-slate-400">{h.roundsNote}</p>
         </Section>
 
-        <Section title="⭐ 별 이동">
+        <Section title={h.starsTitle}>
           <ul className="list-disc space-y-1 pl-5">
             <li>
-              이긴 사람은 별 <strong className="text-emerald-300">+1</strong>,
-              진 사람은 별 <strong className="text-red-300">−1</strong>합니다.
+              {h.star1a}
+              <strong className="text-emerald-300">{h.star1b}</strong>
+              {h.star1c}
+              <strong className="text-red-300">{h.star1d}</strong>
+              {h.star1e}
             </li>
-            <li>무승부면 별이 이동하지 않습니다.</li>
+            <li>{h.star2}</li>
           </ul>
         </Section>
 
-        <Section title="🏆 승리 조건 (3가지)">
+        <Section title={h.winTitle}>
           <ol className="list-decimal space-y-1 pl-5">
             <li>
-              상대방의 별이 <strong className="text-amber-200">0개</strong>가
-              되면 즉시 승리합니다.
+              {h.win1a}
+              <strong className="text-amber-200">{h.win1b}</strong>
+              {h.win1c}
             </li>
             <li>
-              <strong className="text-amber-200">12라운드</strong>를 모두
-              소모하면 별이 많은 쪽이 승리합니다. (동점이면 무승부)
+              {h.win2a}
+              <strong className="text-amber-200">{h.win2b}</strong>
+              {h.win2c}
             </li>
             <li>
-              게임 시작 후 <strong className="text-amber-200">4시간</strong>이
-              지나면 별이 많은 쪽이 승리합니다. (동점이면 무승부)
+              {h.win3a}
+              <strong className="text-amber-200">{h.win3b}</strong>
+              {h.win3c}
             </li>
           </ol>
         </Section>
 
-        <Section title="🂠 카드 소모 규칙">
+        <Section title={h.cardTitle}>
           <ul className="list-disc space-y-1 pl-5">
-            <li>한 번 제출한 카드는 소모되어 다시 낼 수 없습니다.</li>
-            <li>남은 장수가 0인 카드는 선택할 수 없습니다.</li>
-            <li>같은 라운드에 카드를 두 번 제출할 수는 없습니다.</li>
+            {h.cardRules.map((rule, i) => (
+              <li key={i}>{rule}</li>
+            ))}
           </ul>
         </Section>
 
-        <Section title="🔌 연결이 끊겼을 때">
+        <Section title={h.dcTitle}>
           <p>
-            연결이 끊겨도 <strong className="text-amber-200">60초</strong> 안에
-            다시 접속하면 게임을 이어서 할 수 있습니다. 60초가 지나면 몰수패
-            처리됩니다.
+            {h.dcA}
+            <strong className="text-amber-200">{h.dcStrong}</strong>
+            {h.dcB}
           </p>
         </Section>
 
@@ -126,7 +144,7 @@ export default function HowToPlayPage() {
           href="/"
           className="mt-2 w-full rounded-2xl bg-amber-400 px-6 py-4 text-center text-lg font-bold text-slate-900 transition active:scale-95"
         >
-          메인으로 돌아가기
+          {h.backToMain}
         </Link>
       </div>
     </main>

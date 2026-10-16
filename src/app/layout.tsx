@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Toaster from './components/Toaster';
+import { LanguageProvider } from './i18n/LanguageContext';
 
 export const metadata: Metadata = {
   title: '한정 가위바위보',
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        {children}
-        <Toaster />
+        <LanguageProvider>
+          {children}
+          <Toaster />
+        </LanguageProvider>
       </body>
     </html>
   );

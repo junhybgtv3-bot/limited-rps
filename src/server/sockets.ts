@@ -306,7 +306,7 @@ export function attachSockets(io: Server): void {
         (payload as { nickname?: unknown } | null)?.nickname,
       );
       if (!nickname) {
-        ack({ ok: false, error: '닉네임을 입력해 주세요.' });
+        ack({ ok: false, code: 'NICKNAME_REQUIRED', error: '닉네임을 입력해 주세요.' });
         return;
       }
       try {
@@ -342,7 +342,7 @@ export function attachSockets(io: Server): void {
         socketRoom.set(socket.id, { code: created.code, slot: 'A' });
         ack({ ok: true, roomCode: created.code, slot: 'A', reconnectToken: created.reconnectToken });
       } catch {
-        ack({ ok: false, error: '방 생성에 실패했습니다.' });
+        ack({ ok: false, code: 'CREATE_FAILED', error: '방 생성에 실패했습니다.' });
       }
     });
 

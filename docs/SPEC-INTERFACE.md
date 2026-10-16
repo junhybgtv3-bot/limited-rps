@@ -167,7 +167,7 @@ export function hashToken(token: string): string; // sha256 hex
 ### Client → Server
 | 이벤트 | 페이로드 | 응답/브로드캐스트 |
 |---|---|---|
-| `room:create` | `{ nickname: string }` | ack → `{ ok: true, roomCode, slot: 'A', reconnectToken }` / `{ ok: false, error }` |
+| `room:create` | `{ nickname: string }` | ack → `{ ok: true, roomCode, slot: 'A', reconnectToken }` / `{ ok: false, code: 'NICKNAME_REQUIRED'|'CREATE_FAILED', error }` (error는 하위 호환용 메시지, 클라이언트는 code 기준으로 현지화) |
 | `room:join` | `{ roomCode: string, nickname: string }` | ack → `{ ok: true, slot, reconnectToken }` / `{ ok: false, code: RoomErrorCode, message }`. 성공 시 방 전체에 `lobby:update` |
 | `room:reconnect` | `{ roomCode: string, reconnectToken: string }` | ack → `{ ok: true, slot, phase: 'lobby'|'game', lobby?: LobbyState, game?: PublicGameView }` / `{ ok: false, code }` |
 | `lobby:ready` | `{ ready: boolean }` | 방 전체 `lobby:update`. 양쪽 ready=true → 서버가 게임 생성 후 양쪽에 `game:start` |

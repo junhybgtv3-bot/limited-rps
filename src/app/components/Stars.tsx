@@ -1,3 +1,7 @@
+'use client';
+
+import { useLanguage } from '../i18n/LanguageContext';
+
 interface Props {
   count: number;
   max?: number;
@@ -6,10 +10,11 @@ interface Props {
 
 /** 별 개수 표시. 총합(기본 6개) 중 보유한 만큼 금색으로 채움. */
 export default function Stars({ count, max = 6, className = '' }: Props) {
+  const { t } = useLanguage();
   return (
     <span
       className={`inline-flex items-center gap-0.5 text-lg leading-none ${className}`}
-      aria-label={`별 ${count}개`}
+      aria-label={t.room.starsAria(count)}
     >
       {Array.from({ length: max }).map((_, i) => (
         <span

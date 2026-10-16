@@ -1,6 +1,7 @@
 'use client';
 
-import { CARD_EMOJI, CARD_LABEL, type CardType } from '@/shared/types';
+import { CARD_EMOJI, type CardType } from '@/shared/types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface Props {
   card: CardType;
@@ -17,6 +18,7 @@ export default function CardButton({
   disabled,
   onSelect,
 }: Props) {
+  const { t } = useLanguage();
   const base =
     'flex min-h-[6.5rem] flex-1 flex-col items-center justify-center gap-1 rounded-2xl border-2 p-3 transition active:scale-95 sm:min-h-[7.5rem]';
   const state = disabled
@@ -31,13 +33,15 @@ export default function CardButton({
       disabled={disabled}
       onClick={() => onSelect(card)}
       className={`${base} ${state}`}
-      aria-label={`${CARD_LABEL[card]} ${count}장 남음`}
+      aria-label={t.room.cardAria(t.cardName[card], count)}
     >
       <span className="text-4xl sm:text-5xl">{CARD_EMOJI[card]}</span>
       <span className="text-sm font-bold text-slate-100">
-        {CARD_LABEL[card]}
+        {t.cardName[card]}
       </span>
-      <span className="text-xs font-medium text-slate-400">× {count}장</span>
+      <span className="text-xs font-medium text-slate-400">
+        {t.room.cardCount(count)}
+      </span>
     </button>
   );
 }

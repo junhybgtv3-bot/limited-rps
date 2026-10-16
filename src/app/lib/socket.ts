@@ -1,4 +1,8 @@
 import { io, type Socket } from 'socket.io-client';
+import { getLang } from '../i18n/LanguageContext';
+import { en } from '../i18n/en';
+import { ko } from '../i18n/ko';
+import { ja } from '../i18n/ja';
 import type {
   LobbyState,
   PlayerSlot,
@@ -6,6 +10,8 @@ import type {
   RoomErrorCode,
   SubmitErrorCode,
 } from '@/shared/types';
+
+const timeoutDicts = { ko, en, ja };
 
 // ---- 싱글톤 소켓 ----
 let socket: Socket | null = null;
@@ -21,7 +27,7 @@ export function getSocket(): Socket {
 // ---- Ack 페이로드 타입 (docs/SPEC-INTERFACE.md §4) ----
 export type CreateAck =
   | { ok: true; roomCode: string; slot: PlayerSlot; reconnectToken: string }
-  | { ok: false; error: string };
+  | { ok: false; code?: string; error: string };
 
 export type JoinAck =
   | { ok: true; slot: PlayerSlot; reconnectToken: string }
@@ -51,7 +57,7 @@ export function emitAck<T>(
     const timer = setTimeout(() => {
       if (!done) {
         done = true;
-        reject(new Error('서버 응답 시간 초과'));
+        reject(new Error(timeoutDicts[getLang()].common.responseTimeout));
       }
     }, timeoutMs);
     try {
