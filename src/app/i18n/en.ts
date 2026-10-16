@@ -35,6 +35,7 @@ export const en: Dict = {
     join: 'Join',
     joining: 'Joining...',
     creating: 'Creating room...',
+    madeBy: 'Made by',
   },
   errors: {
     join: {

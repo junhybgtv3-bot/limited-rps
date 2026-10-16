@@ -35,6 +35,7 @@ export const ja: Dict = {
     join: '参加する',
     joining: '参加中...',
     creating: '作成中...',
+    madeBy: '制作',
   },
   errors: {
     join: {

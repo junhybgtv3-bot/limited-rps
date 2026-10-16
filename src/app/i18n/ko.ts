@@ -36,6 +36,7 @@ export const ko = {
     join: '참가하기',
     joining: '참가 중...',
     creating: '방 만드는 중...',
+    madeBy: '제작',
   },
   errors: {
     join: {

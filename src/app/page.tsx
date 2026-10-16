@@ -16,6 +16,42 @@ import {
 const inputClass =
   'w-full rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-3 text-lg text-slate-100 placeholder:text-slate-500 focus:border-amber-400 focus:outline-none';
 
+/** JSA 로고 컨셉(주홍색 도리이)에 맞춘 디바이더 */
+function ToriiDivider() {
+  return (
+    <svg
+      viewBox="0 0 120 56"
+      className="mt-5 h-9 w-28"
+      aria-hidden="true"
+      role="presentation"
+    >
+      {/* 가사기(윗 지붕) */}
+      <path
+        d="M6 12 C 40 5, 80 5, 114 12"
+        fill="none"
+        stroke="#1c1917"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      {/* 상단 횡목 */}
+      <path
+        d="M10 20 C 42 14, 78 14, 110 20"
+        fill="none"
+        stroke="#c8402f"
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
+      {/* 하단 횡목(누키) */}
+      <rect x="24" y="29" width="72" height="5" rx="2" fill="#c8402f" />
+      {/* 기둥 */}
+      <rect x="34" y="20" width="6" height="32" rx="2" fill="#c8402f" />
+      <rect x="80" y="20" width="6" height="32" rx="2" fill="#c8402f" />
+      {/* 중심 기둥 */}
+      <rect x="57" y="29" width="6" height="14" rx="2" fill="#c8402f" />
+    </svg>
+  );
+}
+
 export default function HomePage() {
   const router = useRouter();
   const { t } = useLanguage();
@@ -98,11 +134,20 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#020617] px-4 py-10 text-slate-100">
+    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#020617] px-4 py-10 text-slate-100">
+      {/* 도리이 컨셉의 은은한 주홍빛 */}
+      <div
+        className="pointer-events-none absolute -top-32 left-1/2 h-96 w-[42rem] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+        style={{
+          background:
+            'radial-gradient(closest-side, #c8402f 0%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
       <div className="absolute right-4 top-4">
         <LanguageSwitcher />
       </div>
-      <div className="flex w-full max-w-sm flex-col items-center">
+      <div className="relative flex w-full max-w-sm flex-col items-center">
         <div className="mb-2 flex gap-3 text-5xl" aria-hidden="true">
           <span>✊</span>
           <span>✌️</span>
@@ -116,6 +161,7 @@ export default function HomePage() {
           <br />
           {t.home.taglineB}
         </p>
+        <ToriiDivider />
 
         <div className="mt-8 flex w-full flex-col gap-3">
           <button
@@ -128,7 +174,7 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => setShowJoin((v) => !v)}
-            className="w-full rounded-2xl border-2 border-amber-400/60 px-6 py-4 text-lg font-bold text-amber-200 transition active:scale-95"
+            className="w-full rounded-2xl border-2 border-[#c8402f]/70 px-6 py-4 text-lg font-bold text-red-100 transition active:scale-95"
           >
             {t.home.joinRoom}
           </button>
@@ -181,6 +227,20 @@ export default function HomePage() {
             </button>
           </form>
         )}
+
+        <footer className="mt-10 flex flex-col items-center gap-1.5">
+          <img
+            src="/jsa-logo.png"
+            alt="EMU Japanese Student Association"
+            className="h-16 w-16 rounded-full object-cover ring-2 ring-amber-400/60"
+          />
+          <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500">
+            {t.home.madeBy}
+          </p>
+          <p className="text-sm font-semibold tracking-wide text-slate-300">
+            EMU Japanese Student Association
+          </p>
+        </footer>
       </div>
 
       <Modal
