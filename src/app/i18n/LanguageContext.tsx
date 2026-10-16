@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import {
   createContext,
   useCallback,
@@ -46,6 +47,7 @@ function readStoredLang(): Lang {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(readStoredLang);
+  const pathname = usePathname();
 
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
@@ -56,11 +58,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  // 언어 변경 + 라우트 이동 시에도 탭 제목이 선택 언어로 유지되도록 동기화
+  // (App Router가 네비게이션마다 layout metadata 제목으로 document.title을 덮어씀)
   useEffect(() => {
     currentLang = lang;
     document.documentElement.lang = lang;
     document.title = dicts[lang].meta.title;
-  }, [lang]);
+  }, [lang, pathname]);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: dicts[lang] }}>
